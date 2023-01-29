@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
             // setError(true);
             window.alert("enter correct")
         } else {
-            axios.post('http://127.0.0.1:8000/account/login', {
+            axios.post(BASE_URL+'/account/login', {
                 email: email,
                 password: password
             }).then((res) => {
