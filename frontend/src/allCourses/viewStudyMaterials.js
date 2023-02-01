@@ -15,11 +15,13 @@ export function ViewChapterMaterial() {
     const [materials, setMaterials] = useState([])
     const { authtokens } = useContext(AuthContext)
     const { tokendetails } = useContext(AuthContext)
+    const { BASE_URL } = useContext(AuthContext)
+
 
 
 
     const hello = async () => {
-        let response = await axios.get('http://127.0.0.1:8000/courses/chapter-view/' + newid1)
+        let response = await axios.get(BASE_URL+'/courses/chapter-view/' + newid1)
         console.log(response.data);
         setMaterials(response.data)
     }
@@ -31,7 +33,7 @@ export function ViewChapterMaterial() {
         e.preventDefault()
         console.log("complete working?");
         console.log(id);
-        axios.post('http://127.0.0.1:8000/courses/complete-material', { chapter: newid1, material_id: id },
+        axios.post(BASE_URL+'/courses/complete-material', { chapter: newid1, material_id: id },
             {
                 headers: {
                     'Authorization': 'Bearer ' + String(authtokens?.token.access)

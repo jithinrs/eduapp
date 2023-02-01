@@ -114,13 +114,13 @@ class OtpLoginview(APIView):
 
     def post(self , request:Request):
         mobile = request.data.get('mobile')
-        print("poda")
         print(mobile)
         try:
             user = Account.objects.get(mobile = mobile)
             send_otp(mobile)
             return Response(data={"message": " email or password!"})
-        except:
+        except Exception as e:
+            print(e)
             return Response(data={"message": "mobile is not registered"})
 
 class Otpverification(APIView):

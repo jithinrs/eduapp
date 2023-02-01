@@ -18,16 +18,15 @@ export function AllCoursePage() {
     let user_id = user.user.user_id
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/courses/all-course/' + user_id, { user: user.user.user_id }).then((response) => {
+        axios.get(BASE_URL+'/courses/all-course/' + user_id, { user: user.user.user_id }).then((response) => {
             console.log("podey");
             // setStudent(response.data)
             // setAlldubjects(response.data)
             console.log(response);
             setCourses(response.data)
             // console?.log(courses);
-            console.log("poday test");
         })
-        axios.get('http://127.0.0.1:8000/courses/all-subjects').then((response1) => {
+        axios.get(BASE_URL+'/courses/all-subjects').then((response1) => {
             console.log(response1);
             setSubject(response1.data)
 
@@ -38,14 +37,14 @@ export function AllCoursePage() {
     const subjectFilter = (e) => {
         // e.preventDefault()
         console.log(e);
-        axios.post('http://127.0.0.1:8000/courses/all-course/' + user_id, { subject: e }).then((response) => {
+        axios.post(BASE_URL+'/courses/all-course/' + user_id, { subject: e }).then((response) => {
             console.log("podey");
             // setStudent(response.data)
             // setAlldubjects(response.data)
             console.log(response);
             setCourses(response.data)
             // console?.log(courses);
-            console.log("poday test");
+           
         })
         // axios.
     }

@@ -15,9 +15,10 @@ export function CoursePage() {
     const { tokendetails } = useContext(AuthContext)
     let id = user.user.user_id
     const[courses, setCourses] = useState([])
+    const { BASE_URL } = useContext(AuthContext)
 
     // useEffect(() => {
-    //     axios.get('http://127.0.0.1:8000/courses/teacher-course/'+id).then((response) => {
+    //     axios.get(BASE_URL+'/courses/teacher-course/'+id).then((response) => {
     //         console.log("podey");
     //         // setStudent(response.data)
     //         // setAlldubjects(response.data)
@@ -28,7 +29,7 @@ export function CoursePage() {
     // }, [])
 
     const hello = async () => {
-        let response = await axios.get('http://127.0.0.1:8000/courses/teacher-course/'+id)
+        let response = await axios.get(BASE_URL+'/courses/teacher-course/'+id)
         setCourses(response.data)
     }
 

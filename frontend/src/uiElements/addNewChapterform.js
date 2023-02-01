@@ -1,7 +1,10 @@
-import React from "react";
+import React, {useContext} from "react";
 import axios from "axios";
 
+import AuthContext from "../context/authcontext";
 export function AddNewChapterForm(props) {
+  const { BASE_URL } = useContext(AuthContext)
+
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -11,7 +14,7 @@ export function AddNewChapterForm(props) {
     data.append('file_name', e.target.file_name.value)
     data.append('file_description', e.target.file_description.value)
 
-    axios.post('http://127.0.0.1:8000/courses/new-chapter-material-add/', data).then((respose) => {
+    axios.post(BASE_URL+'/courses/new-chapter-material-add/', data).then((respose) => {
       console.log(respose);
       let but1 = document.getElementById('test55')
       but1.click()

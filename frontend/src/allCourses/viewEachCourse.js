@@ -17,6 +17,7 @@ import './style.css'
 export function ViewEachCourse(props) {
     const { newid } = useParams()
     const { authtokens } = useContext(AuthContext)
+    const { BASE_URL } = useContext(AuthContext)
 
     const [chapters, setChapters] = useState([])
     const [loading, setLoading] = useState(true)
@@ -24,7 +25,7 @@ export function ViewEachCourse(props) {
 
     const hello = async () => {
         setLoading(false)
-        let response = await fetch('http://127.0.0.1:8000/courses/show-each-course/' + newid, {
+        let response = await fetch(BASE_URL+'/courses/show-each-course/' + newid, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

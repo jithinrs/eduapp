@@ -23,6 +23,7 @@ export function TeacherHome() {
     const { authtokens } = useContext(AuthContext)
     const { tokendetails } = useContext(AuthContext)
     const { tokenrefresher } = useContext(AuthContext)
+    const { BASE_URL } = useContext(AuthContext)
 
     // console.log(tokendetails);
     let check = tokendetails.datafilled
@@ -45,7 +46,7 @@ export function TeacherHome() {
     }
 
     const getteacherdetails = async () => {
-        let response = await fetch('http://127.0.0.1:8000/teacher/get-each-teacher', {
+        let response = await fetch(BASE_URL+'/teacher/get-each-teacher', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -59,7 +60,7 @@ export function TeacherHome() {
     }
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/courses/all-subjects').then((response) => {
+        axios.get(BASE_URL+'/courses/all-subjects').then((response) => {
             setAlldubjects(response.data)
             // console.log(response.data);
             // let hello = response.data
@@ -83,7 +84,7 @@ export function TeacherHome() {
         data.append('user_id', user.user.user_id)
         data.append('subject', selSubject)
         console.log(data);
-        axios.post('http://127.0.0.1:8000/teacher/teacher-create', data).then((res) => {
+        axios.post(BASE_URL+'/teacher/teacher-create', data).then((res) => {
             tokenrefresher()
         })
     }
@@ -100,7 +101,7 @@ export function TeacherHome() {
         data.append('course_description', e.target.course_description.value)
 
         console.log(data);
-        axios.post('http://127.0.0.1:8000/courses/create-course', data).then((res) => {
+        axios.post(BASE_URL+'/courses/create-course', data).then((res) => {
             console.log(res);
         })
 

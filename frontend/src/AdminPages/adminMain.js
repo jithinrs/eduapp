@@ -1,15 +1,19 @@
-import React from "react";
+import React ,{useContext} from "react";
 import './style.css'
 import eduapp from '../staticImages/eduapp.png'
 import { Link, Outlet } from "react-router-dom";
+import AuthContext from "../context/authcontext";
 
 export function AdminBase() {
+
+    let { logoutUser } = useContext(AuthContext)
+
 
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark">
                 <div className="container-fluid">
-                <img className="admin-logo" src={eduapp} alt="" />
+                <Link to='/admint'><img className="admin-logo" src={eduapp} alt="" /></Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -35,7 +39,14 @@ export function AdminBase() {
                                 <Link to='/admint/pending-requests' className="nav-link active text-dark">Pending requests</Link>
 
                             </li>
+
+                            
                         </ul>
+                        <div className="register-button">
+
+                        <button onClick={logoutUser}>Log out</button>
+
+                    </div>
                     </div>
                 </div>
             </nav>

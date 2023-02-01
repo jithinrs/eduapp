@@ -132,7 +132,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("redis", 6379)],
+            "hosts": [("127.0.0.1", 6379)],
         },
     },
 }
@@ -192,29 +192,18 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ACCOUNT_SID='AC88d1b4e0e16cd6bb345b62a6148060bb'
-AUTH_TOKEN = 'cfb170af74b6201fa3fa2b38d065e90c'
-SERVICES_ID='VA4840bc38f8b8963adc0d7ae1519b3443'
+ACCOUNT_SID= os.environ.get('ACCOUNT_SID')
+AUTH_TOKEN = os.environ.get('AUTH_TOKEN')
+SERVICES_ID= os.environ.get('SERVICES_ID')
 
 MEDIA_URL="/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR,"media")
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  
-# MAILER_EMAIL_BACKEND = EMAIL_BACKEND  
-# EMAIL_HOST = 'smtp.gmail.com'  
-# EMAIL_HOST_PASSWORD = 'shaloofsalim'  
-# EMAIL_HOST_USER = 'jithinrsdev@gmail.com'  
-# EMAIL_PORT = 465  
-# EMAIL_USE_SSL = True  
-# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'jithinrstash@gmail.com'
-EMAIL_HOST_PASSWORD = 'fmobdmmdeuxrvqep'  
+EMAIL_HOST_PASSWORD = os.environ.get('APP_PASSWORD')

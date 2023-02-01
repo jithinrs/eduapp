@@ -1,7 +1,10 @@
-import React from "react";
+import React, {useContext} from "react";
 import axios from "axios";
+import AuthContext from "../context/authcontext";
 
 export function ModalForm(props) {
+  const { BASE_URL } = useContext(AuthContext)
+
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -13,7 +16,7 @@ export function ModalForm(props) {
     let chapter_description = e.target.chapter_description.value
 
 
-    axios.post('http://127.0.0.1:8000/courses/add-new-chapter/' + courseid, {
+    axios.post(BASE_URL+'/courses/add-new-chapter/' + courseid, {
       course_id: courseid,
       chapter_name: chapter_name,
       chapter_description : chapter_description

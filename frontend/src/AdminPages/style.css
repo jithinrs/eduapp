@@ -9,3 +9,11 @@
 .space-after-nav{
     height: 50px;
 }
+
+.dashboard-body{
+    background-color: #47476b;
+}
+
+.dashboard-small-card{
+    background-color: #85adad;
+}

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import AuthContext from "../context/authcontext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -12,9 +13,14 @@ export function Registerpage() {
     const [mobile, setMobile] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [gender, setGender] = useState('');
+    const [dob, setDob] = useState('');
+    const [roles, setRoles] = useState('');
 
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
+    const { BASE_URL } = useContext(AuthContext)
+
 
     const navigate = useNavigate()
 
@@ -40,6 +46,21 @@ export function Registerpage() {
         setSubmitted(false);
     };
 
+    const handleGender = (e) => {
+        setGender(e.target.value);
+        setSubmitted(false);
+    };
+
+    const handleDob = (e) => {
+        setDob(e.target.value);
+        setSubmitted(false);
+    };
+
+    const handleRoles = (e) => {
+        setRoles(e.target.value);
+        setSubmitted(false);
+    };
+
     // Handling the password change
     const handlePassword = (e) => {
         setPassword(e.target.value);
@@ -52,12 +73,15 @@ export function Registerpage() {
         if (firstName === '' || email === '' || password === '') {
             setError(true);
         } else {
-            axios.post('http://127.0.0.1:8000/account/register', {
-                first_name : firstName,
-                last_name : secondName,
-                mobile : mobile,
-                email : email,
-                password : password
+            axios.post(BASE_URL + '/account/register', {
+                first_name: firstName,
+                last_name: secondName,
+                mobile: mobile,
+                email: email,
+                gender: gender,
+                password: password,
+                date_of_birth : dob,
+                roles : roles
             }).then((res) => {
                 navigate('/login')
             })
@@ -104,10 +128,23 @@ export function Registerpage() {
                             value={secondName} type="text" />
                         <label className="label">Phone Number</label>
                         <input onChange={handleMobile} className="form-control"
-                            value={mobile} type="email" />
+                            value={mobile} type="number" />
                         <label className="label">Email</label>
                         <input onChange={handleEmail} className="form-control"
                             value={email} type="email" />
+                        <label htmlFor="">Gender</label>
+                        <select onChange={handleGender} className="form-control" name="gender" id="">
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                            <option value="O">Other</option>
+                        </select>
+                        <label htmlFor="">Date of Birth</label>
+                        <input onChange={handleDob} className="form-control" type="date" name="date_of_birth" />
+                        <label htmlFor="">Roles</label>
+                        <select onChange={handleRoles} className="form-control" name="roles" id="">
+                            <option value="S">Student</option>
+                            <option value="T">Teacher</option>
+                        </select>
                         <label className="label">Password</label>
                         <input onChange={handlePassword} className="form-control"
                             value={password} type="password" />

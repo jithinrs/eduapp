@@ -5,15 +5,18 @@ import { useParams } from "react-router-dom";
 
 import { TeacherNavbar } from "../Components/teacherNavbar";
 import { AddNewChapterForm } from "../uiElements/addNewChapterform";
+import AuthContext from "../context/authcontext";
 
 export function ChapterMaterial() {
 
     const { id,id1 } = useParams()
     console.log(id,id1);
     const [materials, setMaterials] = useState([])
+    const { BASE_URL } = useContext(AuthContext)
+
 
     const hello = async () => {
-        let response = await axios.get('http://127.0.0.1:8000/courses/chapter-view/' + id1)
+        let response = await axios.get(BASE_URL+'/courses/chapter-view/' + id1)
         console.log(response.data);
         setMaterials(response.data)
     }

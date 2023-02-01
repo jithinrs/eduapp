@@ -8,15 +8,18 @@ import Box from '@mui/material/Box';
 import { ModalForm } from "../uiElements/modalForm";
 
 import { TeacherNavbar } from "../Components/teacherNavbar";
+import AuthContext from "../context/authcontext";
 
 export function EachCourse(props) {
     const { id } = useParams()
     const [chapters, setChapters] = useState([])
     const [loading, setLoading] = useState(true)
+    const { BASE_URL } = useContext(AuthContext)
+
 
     const hello = async () => {
         setLoading(false)
-        let response = await axios.get('http://127.0.0.1:8000/courses/each-course/' + id)
+        let response = await axios.get(BASE_URL+'/courses/each-course/' + id)
         console.log(response.data);
         setLoading(true)
         setChapters(response.data)

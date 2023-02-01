@@ -10,12 +10,14 @@ export function NavBar() {
     let { logoutUser } = useContext(AuthContext)
     let { tokendetails } = useContext(AuthContext)
     let { authtokens } = useContext(AuthContext)
+    const { BASE_URL } = useContext(AuthContext)
+
 
     const [notifications, getNotifications] = useState([])
 
     const notificationBar = () => {
 
-        axios.get('http://127.0.0.1:8000/courses/student-notification',
+        axios.get(BASE_URL+'/courses/student-notification',
             {
                 headers: {
                     'Authorization': 'Bearer ' + String(authtokens?.token.access)
@@ -41,8 +43,11 @@ export function NavBar() {
                 <Link to='/'>Home</Link>
                 <Link>Courses</Link>
                 <Link>Contact Us</Link>
-                <Link to='/admint'>Admin</Link>
-                <Link to='coursedetails'>coursedetails</Link>
+                {
+                    tokendetails.Roles === "A"?
+                <Link to='/admint'>Admin</Link>:null
+                }
+                {/* <Link to='coursedetails'>coursedetails</Link> */}
             </div>
 
             {firstname

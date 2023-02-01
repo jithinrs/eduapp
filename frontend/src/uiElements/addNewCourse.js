@@ -10,6 +10,8 @@ export function AddNewCourse( props) {
 
   const [allsubjects, setAlldubjects] = useState([])
   const [selSubject, setSelSubjects] = useState([])
+  const { BASE_URL } = useContext(AuthContext)
+
 
   const { user } = useContext(AuthContext)
 
@@ -22,7 +24,7 @@ export function AddNewCourse( props) {
   }
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/courses/all-subjects').then((response) => {
+    axios.get(BASE_URL+'/courses/all-subjects').then((response) => {
         console.log("podey");
         // setStudent(response.data)
         setAlldubjects(response.data)
@@ -42,7 +44,7 @@ export function AddNewCourse( props) {
     data.append('course_description', e.target.course_description.value)
 
     console.log(data);
-    axios.post('http://127.0.0.1:8000/courses/create-course',data).then((res) => {
+    axios.post(BASE_URL+'/courses/create-course',data).then((res) => {
         console.log(res);
         let but1 = document.getElementById('test55')
 

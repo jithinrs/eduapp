@@ -24,6 +24,8 @@ export function Loginpage() {
     let { open } = useContext(AuthContext)
     let { setOpen } = useContext(AuthContext)
     let { alertMessage } = useContext(AuthContext)
+    const { BASE_URL } = useContext(AuthContext)
+
 
     const handleEmail = (e) => {
         setEmail(e.target.value);
@@ -67,7 +69,7 @@ export function Loginpage() {
         if (email === '' || password === '') {
             setError(true);
         } else {
-            axios.post('http://127.0.0.1:8000/account/login', {
+            axios.post(BASE_URL+'/account/login', {
                 email: email,
                 password: password
             }).then((res) => {
@@ -150,8 +152,3 @@ export function Loginpage() {
     )
 }
 
-
-// {
-//     "email":"jithu@gmail.com"
-//     "password":"podapatti"
-//     }

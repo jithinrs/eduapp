@@ -8,9 +8,11 @@ export function Adminsubjects() {
 
     const { authtokens } = useContext(AuthContext)
     const [subjects, setSubjects] = useState([])
+    const { BASE_URL } = useContext(AuthContext)
+
 
     const getSubjects = async () => {
-        let response =  await fetch('http://127.0.0.1:8000/admin_eduapp/get-all-subjects', {
+        let response =  await fetch(BASE_URL+'/admin_eduapp/get-all-subjects', {
             method:'GET',
             headers:{
                 'Content-Type': 'application/json',

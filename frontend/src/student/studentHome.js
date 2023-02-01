@@ -16,6 +16,7 @@ export function Studenthome() {
     const { user } = useContext(AuthContext)
     const { tokenrefresher } = useContext(AuthContext)
     const [courses, setCourses] = useState([])
+    const { BASE_URL } = useContext(AuthContext)
 
 
 
@@ -25,7 +26,7 @@ export function Studenthome() {
     let check = tokendetails.datafilled
 
     const getstudentcourses = () => {
-        axios.get('http://127.0.0.1:8000/student/student-courses/' + tokendetails?.user_id).then((response) => {
+        axios.get(BASE_URL+'/student/student-courses/' + tokendetails?.user_id).then((response) => {
             console.log(response);
             setCourses(response.data)
         })
@@ -47,7 +48,7 @@ export function Studenthome() {
         data.append('guardian_number', e.target.guardian_number.value)
         data.append('user_id', user.user.user_id)
         console.log(data);
-        axios.post('http://127.0.0.1:8000/student/student-create', data).then((res) => {
+        axios.post(BASE_URL+'/student/student-create', data).then((res) => {
             // console.log(res);
             tokenrefresher()
         })

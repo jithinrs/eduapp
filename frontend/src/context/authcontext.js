@@ -84,9 +84,7 @@ export const AuthProvider = ({ children }) => {
                     if (tokendetail?.Roles == "S") {
                         navigate('student-home')
                     } else if (tokendetail?.Roles == "T") {
-                        console.log("hellopoda");
                         console.log(tokendetail);
-                        console.log("hellopoda");
                         navigate('teacher-home')
                     } else {
                         navigate('/')
@@ -106,7 +104,7 @@ export const AuthProvider = ({ children }) => {
         if (mobile === '') {
             window.alert("enter correct")
         } else {
-            axios.post('http://127.0.0.1:8000/account/otplogin', {
+            axios.post(BASE_URL+'/account/otplogin', {
                 mobile: mobile
             }).then((res) => {
                 console.log(res);
@@ -128,12 +126,11 @@ export const AuthProvider = ({ children }) => {
         if (otp === 1) {
             window.alert('emptyfield')
         } else {
-            axios.post('http://127.0.0.1:8000/account/otpverify', {
+            axios.post(BASE_URL+'/account/otpverify', {
                 mobile: number,
                 otp: otp
             }).then((res) => {
                 if (res.data.message === "invalid otp") {
-                    console.log("poda");
                     window.alert("invalid otp")
                 } else {
                     setAuthtokens(res.data.token)
@@ -154,7 +151,7 @@ export const AuthProvider = ({ children }) => {
         console.log("refreshed");
         let user_id = user.user.user_id
         console.log((user_id));
-        axios.post('http://127.0.0.1:8000/account/tokenrefresher', { user_id: user_id }).then((res) => {
+        axios.post(BASE_URL+'/account/tokenrefresher', { user_id: user_id }).then((res) => {
             console.log(res);
             let tokendetail = jwt_decode(res.data.token.access)
             setTokendetails(tokendetail)
@@ -206,7 +203,7 @@ export const AuthProvider = ({ children }) => {
 
 
     const updateToken = async () => {
-        let response = await fetch('http://127.0.0.1:8000/account/api/token/refresh/', {
+        let response = await fetch(BASE_URL+'/account/api/token/refresh/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

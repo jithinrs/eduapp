@@ -23,6 +23,8 @@ export function TeacherApplication() {
     const {user} = useContext(AuthContext)
     const {firstname} = useContext(AuthContext)
     const {userRole, setuserRole} = useContext(AuthContext)
+    const { BASE_URL } = useContext(AuthContext)
+
 
 
     const handleSubmit = (e) => {
@@ -41,7 +43,7 @@ export function TeacherApplication() {
         if (false) {
 
         } else {
-            axios.post('http://127.0.0.1:8000/teacher/teacher-apply', {
+            axios.post(BASE_URL+'/teacher/teacher-apply', {
                 user_id : user.user.user_id,
                 first_name : first_name,
                 last_name : last_name,

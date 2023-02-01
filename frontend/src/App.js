@@ -64,7 +64,7 @@ function App() {
             <Route path="/register" element={<Registerpage />} />
             <Route element={<PrivateRoute />} >
               <Route path='/' element={<LandingPage />} />
-              <Route path="coursedetails" element={<div>coursedetails</div>} />
+              {/* <Route path="coursedetails" element={<div>coursedetails</div>} /> */}
               <Route path='student-enroll' element={<StudentApplication />} />
               <Route path='teacher-apply' element={<TeacherApplication />} />
             </Route>

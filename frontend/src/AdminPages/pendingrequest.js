@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 import { AdminBase } from "./adminMain";
+import AuthContext from "../context/authcontext";
 
 export function PendingRequests() {
 
     const [pendingRequests, setPendingRequests] = useState([])
+    const { BASE_URL } = useContext(AuthContext)
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/admin_eduapp/teachers-pending-request').then((response) => {
+        axios.get(BASE_URL+'/admin_eduapp/teachers-pending-request').then((response) => {
             console.log(response.data);
             setPendingRequests(response.data)
         })

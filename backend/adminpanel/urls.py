@@ -9,6 +9,7 @@ urlpatterns = [
     path('teachervalidation', TeacherValidation),
     path('emailayakk', tryemail),
     path('get-all-subjects', ListSubjects.as_view()),
-    path('block-unblock/<int:id>', blockunblockuser)
+    path('block-unblock/<int:id>', blockunblockuser),
+    path('admin-dashboard', AdminDashboard)
     
 ]

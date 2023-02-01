@@ -13,6 +13,8 @@ import AuthContext from "../context/authcontext";
 
 export function CheckPendingRequests(props) {
     const [teacher, setTeacher] = useState([])
+    const { BASE_URL } = useContext(AuthContext)
+
     const { id } = useParams()
     const navigate = useNavigate()
 
@@ -21,15 +23,15 @@ export function CheckPendingRequests(props) {
 
     console.log(id);
     useEffect(() => {
-        axios?.get('http://127.0.0.1:8000/admin_eduapp/teachers-pending/' + id).then((response) => {
+        axios?.get(BASE_URL+'/admin_eduapp/teachers-pending/' + id).then((response) => {
             console.log(response);
             console.log(response.data);
             setTeacher(response.data)
         })
 
     }, [])
-    let profile_image = 'http://127.0.0.1:8000/' + teacher.profile_image
-    let certificate = 'http://127.0.0.1:8000/' + teacher.certificate
+    let profile_image = BASE_URL +'/' + teacher.profile_image
+    let certificate = BASE_URL+'/' + teacher.certificate
     let subArray = teacher.subject
     console.log(subArray);
 
@@ -37,7 +39,7 @@ export function CheckPendingRequests(props) {
         e.preventDefault()
         console.log("accept");
         let verify = "accept"
-        axios.post('http://127.0.0.1:8000/admin_eduapp/teachervalidation', {verify : verify, user_id : id}).then((response) => {
+        axios.post(BASE_URL+'/admin_eduapp/teachervalidation', {verify : verify, user_id : id}).then((response) => {
             console.log(response);
             navigate('/admint/pending-requests')
         })
@@ -47,7 +49,7 @@ export function CheckPendingRequests(props) {
         e.preventDefault()
         console.log("accept");
         let verify = "decline"
-        axios.post('http://127.0.0.1:8000/admin_eduapp/teachervalidation', {verify : verify, user_id : id}).then((response) => {
+        axios.post(BASE_URL+'/admin_eduapp/teachervalidation', {verify : verify, user_id : id}).then((response) => {
             console.log(response);
         })
     }

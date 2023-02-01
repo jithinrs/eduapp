@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, {useContext, useState, useEffect } from "react";
 import axios from "axios";
+import AuthContext from "../context/authcontext";
 
 import { AdminBase } from "./adminMain";
 
 export function Adminteacher() {
 
     const [teacher, setTeacher] = useState([])
+    const { BASE_URL } = useContext(AuthContext)
+
 
 
 
     const blockUnblockUser = async (id) => {
-        let response = await fetch('http://127.0.0.1:8000/admin_eduapp/block-unblock/'+id , {
+        let response = await fetch(BASE_URL+'/admin_eduapp/block-unblock/'+id , {
             method:'POST'
         })
         var closebtn = document.getElementById('blockbutton'+id)
@@ -21,7 +24,7 @@ export function Adminteacher() {
     }
 
     const getStudentList = async () =>{
-        let response = await fetch('http://127.0.0.1:8000/admin_eduapp/teachers-list', {
+        let response = await fetch(BASE_URL+'/admin_eduapp/teachers-list', {
             method:'GET'
         })
         let data = await response.json()
@@ -42,7 +45,7 @@ export function Adminteacher() {
             </div>
 
 
-            <table className="table table-striped">
+            <table className="container table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">#</th>

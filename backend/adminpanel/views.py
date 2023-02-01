@@ -20,7 +20,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.http import HttpResponse
 
-from courseformat.models import Subjects
+from courseformat.models import Subjects,Course
 from courseformat.serializers import SubjectSerializer
 
 
@@ -105,6 +105,21 @@ def blockunblockuser(request, id):
             }
     return Response(data = response)
 
+
+@api_view(['GET'])
+def AdminDashboard(request):
+    total_students = Account.objects.filter(roles = "S").count()
+    total_teacher = Account.objects.filter(roles = "T").count()
+    total_courses = Course.objects.all().count()
+    print(total_courses)
+
+    response = {
+                "total_students": total_students,
+                'total_teachers': total_teacher,
+                'total_courses' : total_courses
+            }
+    return Response(data = response)
+    
 
 
 def tryemail(request):
