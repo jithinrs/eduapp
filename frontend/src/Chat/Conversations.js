@@ -15,10 +15,12 @@ export function Conversations() {
     const { authtokens } = useContext(AuthContext)
     const { tokendetails } = useContext(AuthContext)
     const [users, setUsers] = useState([]);
+    const { BASE_URL } = useContext(AuthContext)
+
 
     useEffect(() => {
         async function fetchUsers() {
-            const res = await fetch("http://127.0.0.1:8000/chat/allusers", {
+            const res = await fetch(BASE_URL+"/chat/allusers", {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

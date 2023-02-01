@@ -21,11 +21,12 @@ export default function Chatapp() {
     const { tokendetails } = useContext(AuthContext)
 
     const { conversationName } = useParams();
+    const WS_URL = '127.0.0.1:8000'
 
     console.log(messageHistory);
 
 
-    const { readyState, sendJsonMessage } = useWebSocket(authtokens ? `ws://127.0.0.1:8000/${conversationName}/` : null, {
+    const { readyState, sendJsonMessage } = useWebSocket(authtokens ? `ws://${WS_URL}/${conversationName}/` : null, {
 
         queryParams: {
             token: authtokens ? authtokens.token.access : "",
